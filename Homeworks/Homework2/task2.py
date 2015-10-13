@@ -1,22 +1,19 @@
-def prime(p):
+def prime(potential_victim):
     i = 2
-    j = True
-    if p == 1:
+    flag = True
+    if potential_victim == 1:
         return False
-    elif p == 2:
+    elif potential_victim == 2:
         return True
     else:
-        while i*i <= p and j != False:
-            if p % i == 0:
-                j = False
+        while i*i <= potential_victim and flag is not False:
+            if potential_victim % i == 0:
+                flag = False
             i += 1
-        if j == True:
-            return True
-        else:
-            return False
+        return flag
 Quantity = int(input())
 for i in range(Quantity):
-    n = int(input())
-    print(prime(n))
+    candidate = int(input())
+    print(prime(candidate))
 
 

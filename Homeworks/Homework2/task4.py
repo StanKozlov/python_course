@@ -1,32 +1,34 @@
 def euclid(n, m):
-    if n%m == 0:
+    if n % m == 0:
         return m
     else:
-        return euclid (m, n%m)
-def rpfilter(a, args):
+        return euclid(m, n % m)
+
+
+def rpfilter(a, *args):
     lst = []
     for arg in args:
-        if a > int(arg):
-            k = euclid(a, arg)
-            if k == 1:
-                lst.append(str(arg))
-        else:
-            k = euclid(arg, a)
-            if k == 1:
-                lst.append(str(arg))
+        if euclid(a, arg) == 1:
+            lst.append(arg)
     if lst == []:
-        return 'None'
+        return None
     else:
-        return ' '.join(lst)
+        return lst
+
+
 s = input()
 numbers = s.split(" ")
-lst1 = []
-i = 1
-a = int(numbers[0])
-while i <= (len(numbers) - 1):    
-    lst1.append(int(numbers[i]))
-    i += 1
-print(rpfilter(a, lst1))
+list_of_interest = []
+for i in numbers:
+    list_of_interest.append(int(i))
+results = rpfilter(*list_of_interest)   
+if results is not None:
+    for i in results:
+        print(i, end = ' ')
+else:
+    print(results)
+    
+
 
 
 
