@@ -9,7 +9,7 @@ for thing in words:
         adjectives += 1
     elif thing[len(thing)-2:] == 'ka':
         nouns += 1
-    else:
+    elif thing != '':
         verbs += 1
 if adjectives == 0 or nouns == 0 or verbs == 0:
     print(0)
@@ -18,4 +18,7 @@ elif adjectives == 1 and nouns == 1 and verbs == 1:
 else:
     k = factorial(adjectives)*nouns*verbs
     print(k)
+    print(factorial(adjectives))
+    print(nouns)
+    print(verbs)
            
