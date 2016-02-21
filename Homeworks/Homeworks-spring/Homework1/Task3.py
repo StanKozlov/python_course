@@ -1,10 +1,10 @@
 n = int(input())
 functions = input().split(' ')
-functions.reverse()
+index = n-1
 working_list = {}
 m = int(input())
 
-for i in range(m):
+for k in range(m):
     s = input().split(' ')
     if s[0] not in working_list:
         working_list[s[0]] = {s[1]: s[2]}
@@ -13,42 +13,26 @@ for i in range(m):
 exc = input()
 
 
-def function_killer(fun, exc):
+def function_killer2(index, exc):
     s = ''
-    if functions != []:
-        if fun in working_list:
-            if exc in working_list[fun]:
-                if working_list[fun][exc] != '_':
-                    exc2 = working_list[fun][exc]
-                    functions.remove(functions[0])
-                    if functions != []:
-                        fun = functions[0]
-                        return function_killer(fun, exc2)
-                    else:
-                        return ''
-                else:
-                    functions.reverse()
-                    for i in functions:
-                        s += i + ' '
-                    return s
-            else:
-                functions.remove(functions[0])
-                if functions != []:
-                    fun = functions[0]
-                    return function_killer(fun, exc)
-                else:
-                    return ''
-        else:
-            functions.remove(functions[0])
-            if functions != []:
-                fun = functions[0]
-                return function_killer(fun, exc)
-            else:
-                return ''
+    if exc in working_list[functions[index]] and working_list[functions[index]][exc] == '_':
+        for j in functions[:index + 1]:
+            s += j + ' '
+        return s
     else:
-        return ''
+        if exc in working_list[functions[index]]:
+            exc2 = working_list[functions[index]][exc]
+            exc = exc2
+        else:
+            pass
+        index = index - 1
+        if index != -1:
+            return function_killer2(index, exc)
+        else:
+            return ''
+              
+print(function_killer2(index, exc))
 
-print(function_killer(functions[0], exc))
 
             
             
