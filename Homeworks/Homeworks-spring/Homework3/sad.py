@@ -2,12 +2,10 @@
 import argparse
 import subprocess
 import os.path
-from shutil import copy, copytree
+from shutil import copy, copytree, rmtree
 
 parser = argparse.ArgumentParser(description='Script for looking for changes '
-                                 'in file or in folder. '
-                                 'If you want to store new state of folder, '
-                                 'delete previous saved version first')
+                                 'in file or in folder.')
 parser.add_argument('command', choices=['store', 'diff'], type=str,
                     help='Store current state of file or folder ("store"), '
                          'or see what is changed ("diff")')
@@ -24,7 +22,11 @@ if command == 'store':
         copy(file, "/home/hamster/PycharmProjects/untitled/sad/")
     elif os.path.isdir(file):
         folder = "/home/hamster/PycharmProjects/untitled/sad/" + filename
-        copytree(file, folder)
+        if os.path.exists(folder):
+            rmtree(folder)
+            copytree(file, folder)
+        else:
+            copytree(file, folder)
     else:
         print('Sorry, please enter path to a file or a folder')
 elif command == 'diff':
