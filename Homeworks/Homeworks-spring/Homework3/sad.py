@@ -27,6 +27,8 @@ if command == 'store':
         copytree(file, folder)
     else:
         print('Sorry, please enter path to a file or a folder')
-else:
+elif command == 'diff':
     operation = 'diff' + ' ' + file + ' ' + './sad/' + filename
     print(subprocess.call(operation, shell=True))
+else:
+    print('Sorry, repeat your command')
